@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery Product</title>
+  </head>
+
+  <body class="py-5">
+    <h1 class="font text-2xl text-center py-5"> Product Data</h1>
+    <table class="mx-auto">
+      <thead>
+        <tr class="bg-slate-100">
+          <th class='border border-slate-600 text-center p-2'>Product ID</th>
+          <th class='border border-slate-600 text-center p-2'>Product Name</th>
+          <th class='border border-slate-600 text-center p-2'>Product Price</th>
+          <th class='border border-slate-600 text-center p-2'>Product Quantity</th>
+          <th class='border border-slate-600 text-center p-2'>Product Delivery Status</th>
+        </tr>
+      </thead>
+      <tbody id="product-data"></tbody>
+    </table>
+    <script>
+      const deliveryStatus = [
+        { name: "ORDER PLACED", color: "#f8fafc" },
+        { name: "PACKAGING", color: "#fafafa" },
+        { name: "SHIPPING", color: "blue" },
+        { name: "DELIVERED", color: "green" },
+      ];
+
+      const products = [
+        { id: 1, name: "Product 1", price: 29.99, quantity: 20 },
+        { id: 2, name: "Product 2", price: 79.99, quantity: 40 },
+        { id: 3, name: "Product 3", price: 24.99, quantity: 30 },
+        { id: 4, name: "Product 4", price: 123.99, quantity: 25 },
+      ];
+
+      function getStatus() {
+        const randomIndex = Math.floor(Math.random() * deliveryStatus.length);
+        return deliveryStatus[randomIndex];
+      }
+
+      const tableBody = document.getElementById("product-data");
+      products.map((product) => {
+        const status = getStatus();
+        const td = `
+				<tr class='border border-slate-700 text-center'>
+					<td class='border border-slate-700'>${product.id}</td>
+					<td class='border border-slate-700'>${product.name}</td>
+					<td class='border border-slate-700'>${product.price.toFixed(2)}</td>
+					<td class='border border-slate-700'>${product.quantity}</td>
+					<td class='${status.color}'> ${status.name}</td>
+				</tr>
+			`;
+        tableBody.innerHTML += td;
+      });
+    </script>
+  </body>
+</html>
